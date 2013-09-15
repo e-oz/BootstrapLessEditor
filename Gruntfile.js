@@ -150,6 +150,27 @@ module.exports = function (grunt) {
         dirs: ['<%= yeoman.dist %>']
       }
     },
+    htmlmin: {
+      dist: {
+        options: {
+          /*removeCommentsFromCDATA: true,
+           // https://github.com/yeoman/grunt-usemin/issues/44
+           //collapseWhitespace: true,
+           collapseBooleanAttributes: true,
+           removeAttributeQuotes: true,
+           removeRedundantAttributes: true,
+           useShortDoctype: true,
+           removeEmptyAttributes: true,
+           removeOptionalTags: true*/
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>',
+          src: ['*.html', 'views/*.html'],
+          dest: '<%= yeoman.dist %>'
+        }]
+      }
+    },
     copy: {
       options: {
         processContentExclude: ['*.{png,gif,jpg,ico,ttf,eot,svg,woff}']
@@ -190,7 +211,8 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
-        'copy:styles'
+        'copy:styles',
+        'htmlmin'
       ]
     },
     karma: {
@@ -266,14 +288,14 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'exec' 
   ]);
 
   grunt.registerTask('default', [
     'jshint',
     'test',
-    'build',
-    'exec'    
+    'build'   
   ]);
   
   grunt.loadNpmTasks('grunt-exec');	
