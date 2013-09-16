@@ -9,7 +9,7 @@ angular.module('CSSEditorApp')
 
     $scope.transform = function() {
       var parser = new less.Parser({
-                                     paths: ['styles/tbs/less/']
+                                     paths: ['./styles/tbs/less/']
                                    });
       var source_less = '';
       $scope.prefetch(function(cache) {
