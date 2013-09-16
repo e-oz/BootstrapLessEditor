@@ -1,9 +1,19 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="leftCol" id="less">
+    <div class="col-xs-12 row form-inline">
+        <button ng-click="transform()" class="btn btn-primary">Transform</button>
+        <div class="checkbox col-sm-offset-1">
+            <label for="auto-transform" class="checkbox">
+                <input ng-model="ctrl.auto" type="checkbox" id="auto-transform"/> Auto transform
+            </label>
+        </div>
+        <button ng-click="pasteVariables()" class="btn btn-info col-sm-offset-1">Variables</button>
+    </div>
+    <textarea class="resize-vertical col-xs-12" ng-change="autoTransform()" ng-model="data.less_variables" style="height: 30%; margin-top: 10px;" placeholder="variables"></textarea>
+    <textarea class="resize-vertical col-xs-12" ng-change="autoTransform()" ng-model="data.less_theme" style="height: 30%; margin-top: 10px;" placeholder="theme"></textarea>
+    <textarea class="resize-vertical col-xs-12" ng-model="data.css" rows="10" style="margin-top: 10px;" placeholder="here will be css"></textarea>
 </div>
+<div id="html" class="rightCol">
+    <div ng-include="'views/tbs.html'">
+
+    </div>
+</div>    
