@@ -2,7 +2,7 @@
 
 angular.module('CSSEditorApp')
   .controller(
-  'MainCtrl', function($scope, $http, $q) {
+  'MainCtrl', function($scope, $http, $q, $timeout) {
     $scope.data = {less_variables: '', less_theme: '', css: ''};
     $scope.ctrl = {auto: true};
     $scope.less_cache = '';
@@ -29,11 +29,33 @@ angular.module('CSSEditorApp')
       });
     };
 
-    $scope.autoTransform = function() {
-      if ($scope.ctrl.auto) {
-        $scope.transform();
+    $scope.$watch('data.less_variables', function(newV, oldV) {
+      if (angular.isUndefined(newV)) {
+        return true;
       }
-    };
+      if (!$scope.ctrl.auto) {
+        return false;
+      }
+      $timeout(function() {
+        if (newV === $scope.data.less_variables) {
+          $scope.transform();
+        }
+      }, 400);
+    });
+
+    $scope.$watch('data.less_theme', function(newV, oldV) {      
+      if (angular.isUndefined(newV)) {
+        return true;
+      }
+      if (!$scope.ctrl.auto) {
+        return false;
+      }
+      $timeout(function() {
+        if (newV === $scope.data.less_theme) {
+          $scope.transform();
+        }
+      }, 400);
+    });
 
     $scope.pasteVariables = function() {
       $http.get('./styles/tbs/less/variables.less').
