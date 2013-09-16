@@ -3,9 +3,3 @@ node_modules
 .tmp
 .sass-cache
 app/bower_components
-
-.idea
-
-.tmp
-
-/app/bower_components
