@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('CSSEditorApp', [])
+angular.module('CSSEditorApp', ['ngRoute'])
   .config(function($locationProvider) {
             $locationProvider.html5Mode(true);
           })
