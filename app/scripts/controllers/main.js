@@ -4,7 +4,7 @@ angular.module('CSSEditorApp')
   .controller(
   'MainCtrl', function($scope, $http, $q, $timeout) {
     $scope.data = {less_variables: '', less_theme: '', css: ''};
-    $scope.ctrl = {auto: true};
+    $scope.ctrl = {auto: false};
     $scope.less_cache = '';
 
     $scope.transform = function() {
