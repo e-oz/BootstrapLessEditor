@@ -21,15 +21,16 @@ angular.module('CSSEditorApp')
             console.log(error);
             return false;
           }
-          $('#html style').remove();
+          $('#html').find('style').remove();
           if ($scope.data.css = root.toCSS()) {
             $("<style scoped>" + $scope.data.css + "</style>").appendTo("#html");
           }
+          return true;
         });
       });
     };
 
-    $scope.$watch('data.less_variables', function(newV, oldV) {
+    $scope.$watch('data.less_variables', function(newV) {
       if (angular.isUndefined(newV)) {
         return true;
       }
@@ -41,9 +42,10 @@ angular.module('CSSEditorApp')
           $scope.transform();
         }
       }, 400);
+      return true;
     });
 
-    $scope.$watch('data.less_theme', function(newV, oldV) {      
+    $scope.$watch('data.less_theme', function(newV) {      
       if (angular.isUndefined(newV)) {
         return true;
       }
@@ -55,6 +57,7 @@ angular.module('CSSEditorApp')
           $scope.transform();
         }
       }, 400);
+      return true;
     });
 
     $scope.pasteVariables = function() {
@@ -62,7 +65,7 @@ angular.module('CSSEditorApp')
         success(function(response) {
                   $scope.data.less_variables += "\n" + response + "\n";
                 });
-    }
+    };
 
     $scope.prefetch = function(callback) {
       if ($scope.less_cache != '') {
@@ -123,7 +126,6 @@ angular.module('CSSEditorApp')
       less_files.push("responsive-utilities.less");
 
       $scope.less_cache = '';
-      var promise = $q.defer()
       var requests = [];
 
       for (var i = 0; i < less_files.length; ++i) {
