@@ -98,7 +98,7 @@ module.exports = function (grunt) {
       }
     },
     clean: {
-    	options: { force: true },           
+    	options: { force: true },
       dist: {
         files: [{
           dot: true,
@@ -174,7 +174,7 @@ module.exports = function (grunt) {
     copy: {
       options: {
         processContentExclude: ['*.{png,gif,jpg,ico,ttf,eot,svg,woff}']
-      },          
+      },
       dist: {
         files: [{
           expand: true,
@@ -239,9 +239,9 @@ module.exports = function (grunt) {
     },
     exec: {
        git_add:{
-          command: 'git add .',
+          command: 'git add . --all',
           cwd: '<%= yeoman.dist %>'
-       }		
+       }
      },
      uglify: {
       dist: {
@@ -290,14 +290,14 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'exec' 
+    'exec'
   ]);
 
   grunt.registerTask('default', [
     'jshint',
     'test',
-    'build'   
+    'build'
   ]);
-  
-  grunt.loadNpmTasks('grunt-exec');	
+
+  grunt.loadNpmTasks('grunt-exec');
 };
