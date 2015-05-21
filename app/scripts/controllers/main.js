@@ -2,7 +2,7 @@
 
 angular.module('CSSEditorApp')
   .controller(
-  'MainCtrl', function ($scope, $http, $q, $timeout) {
+  'MainCtrl', ['$scope', '$http', '$q', '$timeout', function ($scope, $http, $q, $timeout) {
     $scope.data = {less_variables: '', less_theme: '', css: ''};
     $scope.ctrl = {auto: false};
     $scope.less_cache = '';
@@ -141,4 +141,4 @@ angular.module('CSSEditorApp')
       });
       return true;
     }
-  });
+  }]);

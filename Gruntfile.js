@@ -185,6 +185,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt,jpg,ttf,eot,svg,woff,less}',
             'images/{,*/}*.{gif,webp}',
             'vendor/**/*',
+            'mixins/**/*',
             'styles/fonts/*',
             'styles/tbs/**/*'
           ]
@@ -227,7 +228,7 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
-    ngmin: {
+    ngAnnotate: {
       dist: {
         files: [{
           expand: true,
@@ -285,7 +286,7 @@ module.exports = function (grunt) {
     'concat',
     'copy:dist',
     'cdnify',
-    'ngmin',
+    'ngAnnotate',
     'cssmin',
     'uglify',
     'rev',
