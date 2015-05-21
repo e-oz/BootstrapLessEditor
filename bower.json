@@ -2,7 +2,7 @@
   "name": "BootstrapLessEditor",
   "version": "0.1.4",
   "dependencies": {
-    "angular": "1.2.6"
+    "angular": "1.4.x"
   },
   "devDependencies": {
   }
