@@ -2,21 +2,21 @@
 
 angular.module('CSSEditorApp')
   .controller(
-  'MainCtrl', function($scope, $http, $q, $timeout) {
+  'MainCtrl', function ($scope, $http, $q, $timeout) {
     $scope.data = {less_variables: '', less_theme: '', css: ''};
     $scope.ctrl = {auto: false};
     $scope.less_cache = '';
 
-    $scope.transform = function() {
+    $scope.transform = function () {
       var parser = new less.Parser({
-                                     paths: ['./styles/tbs/less/']
-                                   });
+        paths: ['./styles/tbs/less/']
+      });
       var source_less = '';
-      $scope.prefetch(function(cache) {
+      $scope.prefetch(function (cache) {
         if (cache) {
           source_less = cache;
         }
-        parser.parse(source_less + $scope.data.less_variables + $scope.data.less_theme, function(error, root) {
+        parser.parse(source_less + $scope.data.less_variables + $scope.data.less_theme, function (error, root) {
           if (error) {
             console.log(error);
             return false;
@@ -30,14 +30,14 @@ angular.module('CSSEditorApp')
       });
     };
 
-    $scope.$watch('data.less_variables', function(newV) {
+    $scope.$watch('data.less_variables', function (newV) {
       if (angular.isUndefined(newV)) {
         return true;
       }
       if (!$scope.ctrl.auto) {
         return false;
       }
-      $timeout(function() {
+      $timeout(function () {
         if (newV === $scope.data.less_variables) {
           $scope.transform();
         }
@@ -45,14 +45,14 @@ angular.module('CSSEditorApp')
       return true;
     });
 
-    $scope.$watch('data.less_theme', function(newV) {      
+    $scope.$watch('data.less_theme', function (newV) {
       if (angular.isUndefined(newV)) {
         return true;
       }
       if (!$scope.ctrl.auto) {
         return false;
       }
-      $timeout(function() {
+      $timeout(function () {
         if (newV === $scope.data.less_theme) {
           $scope.transform();
         }
@@ -60,14 +60,14 @@ angular.module('CSSEditorApp')
       return true;
     });
 
-    $scope.pasteVariables = function() {
+    $scope.pasteVariables = function () {
       $http.get('./styles/tbs/less/variables.less').
-        success(function(response) {
-                  $scope.data.less_variables += "\n" + response + "\n";
-                });
+        success(function (response) {
+          $scope.data.less_variables += "\n" + response + "\n";
+        });
     };
 
-    $scope.prefetch = function(callback) {
+    $scope.prefetch = function (callback) {
       if ($scope.less_cache != '') {
         if (callback) {
           callback($scope.less_cache);
@@ -75,7 +75,7 @@ angular.module('CSSEditorApp')
         return false;
       }
       var less_files = [];
-      // Core variables and mixins      
+      // Core variables and mixins
       less_files.push("variables.less");
       less_files.push("mixins.less");
 
@@ -131,7 +131,7 @@ angular.module('CSSEditorApp')
       for (var i = 0; i < less_files.length; ++i) {
         requests.push($http.get('./styles/tbs/less/' + less_files[i]));
       }
-      $q.all(requests).then(function(values) {
+      $q.all(requests).then(function (values) {
         for (var i = 0; i < values.length; ++i) {
           $scope.less_cache += values[i].data + "\n";
         }

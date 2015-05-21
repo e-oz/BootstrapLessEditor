@@ -2,8 +2,9 @@
   "name": "BootstrapLessEditor",
   "version": "0.1.4",
   "dependencies": {
-    "angular": "1.4.x"
+    "angular": "~1.4.x",
+    "angular-route": "~1.4.x",
+    "jquery": "2.x"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
